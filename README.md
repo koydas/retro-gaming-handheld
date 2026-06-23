@@ -30,7 +30,7 @@ If the end result also plays Pokémon, that's a bonus.
 | Component | Part | Notes |
 |-----------|------|-------|
 | SBC | Raspberry Pi Zero 2W | 1GHz quad-core, ~30×65mm |
-| Display | Waveshare 2.4" DSI | 320×240, direct DSI ribbon connection |
+| Display | 2.4" SPI (ILI9341, TBD) | 320×240, SPI via fbcp-ili9341 |
 | PCB façade | Custom — KiCad → JLCPCB | Houses buttons, routes inputs to Pi |
 | Battery | 3.7V LiPo ~4000mAh | Large-format cell, sized to enclosure |
 | Charge/protect | TP4056 module | CC/CV charging + over-discharge protection |

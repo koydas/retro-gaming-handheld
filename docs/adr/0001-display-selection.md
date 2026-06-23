@@ -1,35 +1,46 @@
-# ADR-0001: Display Selection — Waveshare 2.4" DSI
+# ADR-0001: Display Selection — SPI Display via fbcp-ili9341
 
 **Date:** 2026-06-23  
-**Status:** Accepted
+**Status:** Accepted *(revised — original draft assumed DSI; see context)*
 
 ## Context
 
-The Pi Zero 2W has one combined CSI/DSI ribbon connector. Whatever display is chosen consumes that port entirely — there is no second bus available without a HAT that itself occupies the GPIO header. The enclosure target is approximately 149×68×22mm, which sets a hard upper bound on screen size and constrains how deeply any connector or ribbon can protrude behind the board.
+The Pi Zero 2W has one connector on its short edge: a 22-pin CSI ribbon port for the camera. It does **not** expose a DSI display port. This was not caught in the initial draft of this ADR, which incorrectly assumed a combined CSI/DSI port existed on the Zero 2W (as it does on some other Pi models). The error was flagged during PR review and confirmed against Raspberry Pi's hardware documentation. Everything that followed from that assumption — the rejection of SPI on bandwidth grounds, the selection of a DSI panel — was therefore invalid and is retracted here.
 
-The display must be readable during emulation (320×240 minimum for NES/SNES content), responsive enough to not stutter at typical RetroArch frame rates (~60 fps), and physically mountable flush against the front face of the enclosure without a secondary PCB adapter board.
+The corrected constraint set:
+
+- Pi Zero 2W exposes: CSI (camera), mini-HDMI, micro-USB, 40-pin GPIO header.
+- No DSI port is available. A DSI display cannot be connected without an intermediary board that itself occupies the GPIO header — which is needed for the button matrix.
+- The enclosure target is 149×68×22mm. The Pi Zero 2W at 30×65mm leaves ~19mm on each side for enclosure walls and controls. This width budget is what makes the layout viable; it cannot be traded away for a larger SBC.
+- Target display: ~2.4", 320×240, thin enough to sit flush in 22mm total depth.
+- Target frame rate: **30fps** is sufficient for 8-bit and 16-bit era emulation. This is the revised constraint that changes the SPI calculus.
 
 ## Decision
 
-Use the **Waveshare 2.4" DSI display** (320×240, direct ribbon connection to the Pi Zero 2W DSI port).
+Use an **SPI display** (ILI9341 or compatible controller, 320×240, 2.4") driven by the **fbcp-ili9341** framebuffer copy driver on Batocera.
+
+fbcp-ili9341 uses DMA and pushes the SPI bus at up to ~125MHz effective on a Zero 2W, achieving 30–60fps at 320×240 in 16-bit color on the quad-core CPU. The 30fps target is comfortably met. SPI panels in this size are thin (~2mm PCB + glass), inexpensive, and well-documented under Linux.
+
+The specific module (Waveshare, Adafruit, generic breakout) is not locked in at this ADR stage — any ILI9341-compatible 2.4" panel with a matching pinout will work. Module selection happens at procurement.
 
 ## Considered Alternatives
 
-**SPI displays (ILI9341 or similar, SPI bus)**  
-SPI panels are cheap and widely supported under Batocera/fbcp-ili9341. The problem is bandwidth: the ILI9341 at its typical max SPI clock (~50 MHz effective) delivers around 9–12 fps at 320×240 in 16-bit color. That is insufficient for smooth emulation. The driver overhead on a Pi Zero 2W also competes with the emulator CPU budget in a way that a hardware DSI path does not. Rejected on throughput grounds.
+**DSI display (original decision — retracted)**  
+The initial draft selected a Waveshare 2.4" DSI panel on the grounds that DSI would avoid SPI bandwidth limits. This was based on an incorrect assumption that the Pi Zero 2W exposes a DSI port. It does not. Retracted on hardware constraint grounds.
 
-**Small HDMI panels (3.5"–4" via mini-HDMI)**  
-The Pi Zero 2W exposes only mini-HDMI, which is electrically viable. However, HDMI panels in this size range are physically thicker due to driver boards and frame assemblies, pushing the enclosure depth well past 22mm. They also require a mini-HDMI cable or right-angle adapter that creates a fragile mechanical joint at the thinnest point of the board. Rejected on form-factor grounds.
+**Mini-HDMI to small HDMI panel**  
+The Zero 2W exposes mini-HDMI, making this electrically viable. However: HDMI panels in the 2.4"–3.5" range include a driver board that adds 6–10mm of depth behind the display face, which is incompatible with a 22mm total enclosure depth. A right-angle mini-HDMI adapter plus cable also creates a fragile mechanical joint at a point where the board is close to the enclosure wall. Rejected on depth and mechanical reliability grounds.
 
-**Official Raspberry Pi DSI touchscreen (7")**  
-Far too large for the enclosure. Not considered seriously beyond noting the DSI port compatibility.
+**Switch SBC to Pi 3A+ (which has DSI)**  
+The Pi 3A+ has a native DSI port and would enable the original display plan. However, the Pi 3A+ is 56mm wide vs the Zero 2W's 30mm — in a 68mm-wide enclosure, that leaves 6mm total margin for walls and side controls. The button layout (2×3 action + L/R) requires ~19mm per side and cannot be accommodated. Rejected on enclosure geometry grounds.
 
-**No-name DSI modules from AliExpress**  
-Datasheets and Batocera compatibility are unreliable. The Waveshare part has documented DTS overlays and a known-good track record with Pi Zero. Rejected in favour of a part with credible vendor documentation.
+**SPI at single-threaded speeds (~9–12fps)**  
+The initial ADR rejected SPI citing this figure, which is correct for naive single-threaded writes. fbcp-ili9341 does not use naive writes — it uses DMA and pushes the bus harder than a software loop can. The 9–12fps figure was not representative of the actual driver performance on this hardware. Rejection of SPI was therefore premature and is reversed.
 
 ## Consequences
 
-- The CSI port is permanently occupied; a camera add-on is not possible without replacing the display.
-- Display bring-up depends on the Waveshare DSI overlay being present and correctly configured in Batocera — this is a known quantity but still a setup step.
-- 320×240 is comfortable for 8-bit and 16-bit era content; anything requiring higher resolution (e.g., N64, PSP) will rely on downscaling and will look soft.
-- The DSI ribbon length constrains how far the display can be offset from the Pi board — enclosure layout must account for this.
+- The specific ILI9341 module must be verified for SPI clock compatibility with the Zero 2W before ordering. Most 2.4" modules run fine at 40–62MHz SPI; a few cheaper ones throttle to 16MHz and will not hit 30fps.
+- fbcp-ili9341 configuration requires specifying GPIO pin assignments, SPI bus speed, and display orientation in Batocera. This is documented in the driver's README and is a known-quantity setup step.
+- 30fps at 320×240 covers NES, SNES, GBA, and Game Boy. N64 and PSP content will require downscaling and may stutter — this is accepted for the target platform scope.
+- The CSI camera port remains free. A camera add-on is theoretically possible but not in scope.
+- SPI occupies several GPIO pins. The button matrix PCB routing must avoid those pins; this is a layout constraint for Phase 2.
