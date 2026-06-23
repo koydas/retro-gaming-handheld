@@ -3,7 +3,7 @@
 > A DIY retro gaming handheld built around the Raspberry Pi Zero 2W — my personal vehicle for learning PCB design, power delivery, and mechanical tolerances from scratch.
 
 ![Status](https://img.shields.io/badge/status-in%20progress-yellow)
-![OS](https://img.shields.io/badge/OS-Batocera-blue)
+![OS](https://img.shields.io/badge/OS-RetroPie-blue)
 ![PCB](https://img.shields.io/badge/PCB-KiCad%20→%20JLCPCB-green)
 
 ---
@@ -19,7 +19,7 @@ This is not a kit and not a product — it's a scratch-built handheld game conso
 - **PCB design** — custom façade board in KiCad, manufactured at JLCPCB
 - **Power delivery** — safe LiPo charging and protection with a TP4056 circuit
 - **Mechanical tolerances** — designing a printed enclosure that actually fits
-- **Embedded Linux** — Batocera OS configuration on a constrained platform
+- **Embedded Linux** — RetroPie configuration on a constrained platform
 
 If the end result also plays Pokémon, that's a bonus.
 
@@ -30,13 +30,14 @@ If the end result also plays Pokémon, that's a bonus.
 | Component | Part | Notes |
 |-----------|------|-------|
 | SBC | Raspberry Pi Zero 2W | 1GHz quad-core, ~30×65mm |
-| Display | Waveshare 2.4" DSI | 320×240, direct DSI ribbon connection |
+| Display | 2.4" SPI (ILI9341, TBD) | 320×240, FBTFT (`fb_ili9341`) |
 | PCB façade | Custom — KiCad → JLCPCB | Houses buttons, routes inputs to Pi |
 | Battery | 3.7V LiPo ~4000mAh | Large-format cell, sized to enclosure |
 | Charge/protect | TP4056 module | CC/CV charging + over-discharge protection |
+| Boost converter | 5V boost module (TBD) | Steps up 3.7V LiPo to 5V for the Pi |
 | Enclosure | Bambu Lab FDM print | ~149×68×22mm, PLA or PETG |
 | Buttons | 2×3 diagonal action layout | A/B/X/Y + L/R style arrangement |
-| OS | Batocera Linux | RetroArch-based, pre-built image |
+| OS | RetroPie | RPi OS Bookworm (32-bit), FBTFT (`fb_ili9341`) |
 
 ---
 
@@ -61,14 +62,15 @@ If the end result also plays Pokémon, that's a bonus.
 - [ ] Final print with desired finish
 
 ### Phase 4 — Assembly
-- [ ] Wire power circuit (TP4056 → LiPo → Pi)
+- [ ] Wire power circuit: LiPo cell to TP4056 B+/B− (charging input); boost converter to TP4056 OUT+/OUT− (protected discharge output); boost 5V output to Pi
 - [ ] Seat PCB façade and display
 - [ ] Close enclosure
 - [ ] Smoke test
 
 ### Phase 5 — Software
-- [ ] Flash Batocera to microSD
-- [ ] Configure display (DSI, resolution, overscan)
+- [ ] Flash **Raspberry Pi OS (Legacy, 32-bit) — Bookworm** to microSD (Trixie/Debian 13 FBTFT+RetroPie compatibility unverified — see ADR-0004)
+- [ ] Install RetroPie on top via the RetroPie installer script
+- [ ] Configure FBTFT dtoverlay for ILI9341 in `/boot/firmware/config.txt` (SPI bus, GPIO pins, bus speed) — exact overlay syntax to be confirmed against RPi OS documentation
 - [ ] Map button inputs
 - [ ] Load a ROM or two and actually play something
 
