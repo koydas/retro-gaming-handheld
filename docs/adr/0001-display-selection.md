@@ -17,11 +17,9 @@ The corrected constraint set:
 
 ## Decision
 
-Use an **SPI display** (ILI9341 or compatible controller, 320×240, 2.4") driven by **fbcp-ili9341** on RetroPie / Raspberry Pi OS (32-bit).
+Use an **SPI display** (ILI9341 or compatible controller, 320×240, 2.4") driven by the **FBTFT kernel driver** (`fb_ili9341`) on RetroPie / Raspberry Pi OS Bookworm (32-bit). The driver choice is documented in ADR-0005; this ADR covers the display hardware selection only.
 
-fbcp-ili9341 uses DMA and pushes the SPI bus at up to ~125MHz effective on a Zero 2W, achieving 30–60fps at 320×240 in 16-bit color. The 30fps target is comfortably met. RetroPie on Raspberry Pi OS (32-bit) maintains the DispmanX graphics stack, which is what fbcp-ili9341 requires — this combination has well-documented community setups with ILI9341 panels on Pi Zero hardware. The OS choice is documented in ADR-0004.
-
-SPI panels in this size are thin (~2mm PCB + glass), inexpensive, and well-documented under Linux. The specific module (Waveshare, Adafruit, generic breakout) is not locked in — any ILI9341-compatible 2.4" panel with a matching pinout will work. Module selection happens at procurement.
+SPI panels in this size are thin (~2mm PCB + glass), inexpensive, and compatible with the FBTFT path on current RPi OS without legacy stack dependencies. The specific module (Waveshare, Adafruit, generic breakout) is not locked in — any ILI9341-compatible 2.4" panel will work. Module selection happens at procurement.
 
 ## Considered Alternatives
 
@@ -40,7 +38,7 @@ The initial ADR rejected SPI citing this figure, which is correct for naive sing
 ## Consequences
 
 - The specific ILI9341 module must be verified for SPI clock compatibility with the Zero 2W before ordering. Most 2.4" modules run fine at 40–62MHz SPI; a few cheaper ones throttle to 16MHz and will not hit 30fps.
-- fbcp-ili9341 configuration requires specifying GPIO pin assignments, SPI bus speed, and display orientation. This is well-documented for RetroPie + Raspberry Pi OS and is a known-quantity setup step.
+- Display driver configuration (GPIO pin assignments, SPI bus speed, display orientation) is handled via FBTFT `dtoverlay` — see ADR-0005 for the driver decision and setup details.
 - 30fps at 320×240 covers NES, SNES, GBA, and Game Boy. N64 and PSP content will require downscaling and may stutter — this is accepted for the target platform scope.
 - The CSI camera port remains free. A camera add-on is theoretically possible but not in scope.
 - SPI occupies several GPIO pins. The button matrix PCB routing must avoid those pins; this is a layout constraint for Phase 2.

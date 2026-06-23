@@ -22,7 +22,7 @@ Current phase: **Phase 1 — Design** (specs and layout, no hardware in hand yet
 ## Established hardware facts
 
 - The Pi Zero 2W exposes **CSI (camera), mini-HDMI, micro-USB, and 40-pin GPIO**. It does **not** have a DSI display port. Any ADR or suggestion assuming DSI on this board is wrong.
-- Display interface: **SPI** (ILI9341 or compatible), driven by fbcp-ili9341. 30fps at 320×240 is the target and is achievable.
+- Display interface: **SPI** (ILI9341 or compatible), driven by **FBTFT (`fb_ili9341` kernel module)** on RPi OS Bookworm/KMS. Do not suggest fbcp-ili9341 — it requires DispmanX which is not available on current RPi OS. 30fps at 320×240 is the target; FBTFT performance on Pi Zero 2W is unverified (see ADR-0005).
 - SPI occupies several GPIO pins — the button matrix layout must route around them.
 - Battery: single-cell 3.7V LiPo ~4000mAh, charged via TP4056 module **with DW01A protection IC**. Boost converter required for 5V rail.
 - Enclosure: FDM on Bambu Lab printer, PETG for final print, PLA acceptable for fit-check iterations.
