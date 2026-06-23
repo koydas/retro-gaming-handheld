@@ -16,7 +16,7 @@ The two driver paths available for an ILI9341 SPI panel on current RPi OS (KMS/D
 
 Use **FBTFT (`fb_ili9341`)**, configured via `dtoverlay` in `/boot/firmware/config.txt` on Raspberry Pi OS Bookworm (32-bit).
 
-FBTFT is part of the mainline Linux kernel, actively maintained, and works natively with the KMS-based RPi OS without any legacy stack restoration. It is the standard documented path for SPI TFT panels in the Raspberry Pi OS and RetroPie communities on current images. The native DRM panel driver would be cleaner long-term but has significantly less community documentation for ILI9341 + RetroPie, which adds setup risk for a first build.
+FBTFT is part of the mainline Linux kernel (staging/fbtft — maintenance mode; the kernel README recommends DRM for new hardware), and works natively with the KMS-based RPi OS without any legacy stack restoration. It is the standard documented path for SPI TFT panels in the Raspberry Pi OS and RetroPie communities on current images. The native DRM panel driver would be cleaner long-term but has significantly less community documentation for ILI9341 + RetroPie, which adds setup risk for a first build.
 
 The fbcp-ili9341 driver is explicitly **not used** — it requires DispmanX, which is not available on current RPi OS Bookworm, and its upstream development has stalled (last substantive update 2019, Feb 2024 note acknowledges incompatibility with modern distros).
 
@@ -35,6 +35,6 @@ Eliminates the SPI driver problem entirely. Rejected — both interfaces were al
 
 - **Performance is unverified.** fbcp-ili9341 achieved 60fps through DMA optimisation. FBTFT is a generic kernel driver without the same low-level tuning — achieving 30fps at 320×240 on Pi Zero 2W through the `fbdev` KMS layer needs to be measured before committing to hardware. If FBTFT cannot hit 30fps, the DRM panel driver or a different display technology must be evaluated.
 - FBTFT configuration requires a `dtoverlay` entry in `config.txt` specifying the panel, SPI bus, GPIO pins (reset, DC, CS), and bus speed. This is well-documented in the RPi OS FBTFT wiki.
-- The driver is compatible with any current Raspberry Pi OS Bookworm (32-bit) image. No version pinning required — this ADR removes the provisional constraint from ADR-0004.
+- OS version pinning is governed by ADR-0004, which pins to **Raspberry Pi OS (Legacy, 32-bit) — Bookworm**. Trixie (Debian 13) is now the standard RPi OS release; FBTFT and RetroPie installer compatibility with Trixie is unverified (see ADR-0004 Q3). Do not assume any current image works — use Legacy Bookworm until Trixie is validated.
 - RetroPie's EmulationStation and RetroArch can both target `/dev/fb1` (the FBTFT framebuffer device). Configuration is documented in the RetroPie community for FBTFT panels.
 - SPI bus speed remains a tuning variable. Most ILI9341 panels support 40–62MHz; the Pi Zero 2W SPI controller can be pushed to ~125MHz. Higher clock speeds improve framerate directly — this is the primary lever if 30fps is marginal.
