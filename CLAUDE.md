@@ -43,6 +43,17 @@ This project is in R&D. No hardware has been purchased. **Verify specs against m
 
 When in doubt about a hardware claim, flag it explicitly rather than asserting it confidently.
 
+## PR review comments
+
+When reading review comments on a PR (from Codex or humans), the full workflow is:
+
+1. **Fix** — apply the correction in the codebase (code, ADR, README, whatever is wrong).
+2. **Resolve** — mark the review thread as resolved on GitHub.
+3. **Reply** — post a reply on the thread explaining what was changed and why.
+4. **Re-trigger Codex** — post a comment on the PR with `@codex review` so Codex re-reviews the updated content.
+
+Do all four steps, in order, for every actionable comment. Do not fix silently without replying, and do not reply without fixing.
+
 ## Language
 
 - Code, filenames, and documentation: **English**
