@@ -70,7 +70,7 @@ If the end result also plays Pokémon, that's a bonus.
 ### Phase 5 — Software
 - [ ] Flash Raspberry Pi OS Bookworm (32-bit) to microSD
 - [ ] Install RetroPie on top via the RetroPie installer script
-- [ ] Configure display via FBTFT dtoverlay (`fb_ili9341`, SPI pins, bus speed)
+- [ ] Configure FBTFT dtoverlay for ILI9341 in `/boot/firmware/config.txt` (SPI bus, GPIO pins, bus speed) — exact overlay syntax to be confirmed against RPi OS documentation
 - [ ] Map button inputs
 - [ ] Load a ROM or two and actually play something
 
