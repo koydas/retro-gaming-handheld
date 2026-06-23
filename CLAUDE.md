@@ -37,6 +37,15 @@ All significant hardware and design decisions are documented in `docs/adr/`. Rea
 - Be honest about tradeoffs. No marketing language.
 - If an ADR supersedes a previous one, update the old ADR's status line and document the correction in the new ADR's Context.
 
+## Open questions — verify before hardware procurement
+
+These are unresolved uncertainties that must be answered before committing to components or layout. Do not treat them as solved.
+
+| # | Question | Blocks |
+|---|----------|--------|
+| Q1 | Does FBTFT (`fb_ili9341`) on Pi Zero 2W + RPi OS Bookworm achieve 30fps at 320×240? fbcp-ili9341 did via DMA optimisation; FBTFT is a generic kernel driver and its throughput on this hardware is unmeasured. | Display module procurement, ADR-0005 |
+| Q2 | Charge-and-play topology: is there space on the PCB for a power-path IC (BQ24074 or CN3165)? If not, device must be powered off to charge. | ADR-0002, Phase 2 PCB layout |
+
 ## Spec-first discipline
 
 This project is in R&D. No hardware has been purchased. **Verify specs against manufacturer documentation before writing or updating ADRs.** The DSI assumption in ADR-0001 v1 is an example of what happens when this step is skipped.
