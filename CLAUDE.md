@@ -4,7 +4,7 @@ This file gives Claude the context needed to work on this project without re-der
 
 ## What this project is
 
-A scratch-built retro gaming handheld based on the Raspberry Pi Zero 2W, running Batocera Linux. It is a **learning project**, not a product. The primary goals are PCB design, power delivery, and mechanical tolerances. Playing Pokémon is a bonus.
+A scratch-built retro gaming handheld based on the Raspberry Pi Zero 2W, running RetroPie on Raspberry Pi OS (32-bit). It is a **learning project**, not a product. The primary goals are PCB design, power delivery, and mechanical tolerances. Playing Pokémon is a bonus.
 
 Current phase: **Phase 1 — Design** (specs and layout, no hardware in hand yet).
 

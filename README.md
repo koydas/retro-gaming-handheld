@@ -36,7 +36,7 @@ If the end result also plays Pokémon, that's a bonus.
 | Charge/protect | TP4056 module | CC/CV charging + over-discharge protection |
 | Enclosure | Bambu Lab FDM print | ~149×68×22mm, PLA or PETG |
 | Buttons | 2×3 diagonal action layout | A/B/X/Y + L/R style arrangement |
-| OS | Batocera Linux | RetroArch-based, pre-built image |
+| OS | RetroPie | Raspberry Pi OS-based, fbcp-ili9341 compatible |
 
 ---
 
@@ -67,7 +67,7 @@ If the end result also plays Pokémon, that's a bonus.
 - [ ] Smoke test
 
 ### Phase 5 — Software
-- [ ] Flash Batocera to microSD
+- [ ] Flash RetroPie to microSD
 - [ ] Configure display (SPI/fbcp-ili9341, resolution, overscan)
 - [ ] Map button inputs
 - [ ] Load a ROM or two and actually play something

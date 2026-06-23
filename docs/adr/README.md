@@ -42,3 +42,4 @@ What does this decision make easier or harder going forward?
 | [0001](0001-display-selection.md) | Display Selection | Accepted |
 | [0002](0002-battery-and-charging.md) | Battery and Charging | Accepted |
 | [0003](0003-enclosure-manufacturing.md) | Enclosure Manufacturing | Accepted |
+| [0004](0004-os-selection.md) | OS Selection | Accepted |

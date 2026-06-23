@@ -1,7 +1,7 @@
 # ADR-0001: Display Selection — SPI Display via fbcp-ili9341
 
 **Date:** 2026-06-23  
-**Status:** Accepted — provisional *(revised — original draft assumed DSI; see context. Driver compatibility with current Batocera unverified; see Consequences.)*
+**Status:** Accepted *(revised — original draft assumed DSI; see context)*
 
 ## Context
 
@@ -17,13 +17,11 @@ The corrected constraint set:
 
 ## Decision
 
-Use an **SPI display** (ILI9341 or compatible controller, 320×240, 2.4") with **fbcp-ili9341** as the target driver on Batocera.
+Use an **SPI display** (ILI9341 or compatible controller, 320×240, 2.4") driven by **fbcp-ili9341** on RetroPie / Raspberry Pi OS (32-bit).
 
-When fbcp-ili9341 is operational, it uses DMA and pushes the SPI bus at up to ~125MHz effective on a Zero 2W, achieving 30–60fps at 320×240 in 16-bit color. The 30fps target is comfortably met from a bandwidth standpoint. SPI panels in this size are thin (~2mm PCB + glass), inexpensive, and well-documented under Linux.
+fbcp-ili9341 uses DMA and pushes the SPI bus at up to ~125MHz effective on a Zero 2W, achieving 30–60fps at 320×240 in 16-bit color. The 30fps target is comfortably met. RetroPie on Raspberry Pi OS (32-bit) maintains the DispmanX graphics stack, which is what fbcp-ili9341 requires — this combination has well-documented community setups with ILI9341 panels on Pi Zero hardware. The OS choice is documented in ADR-0004.
 
-**Driver compatibility is unverified at this stage.** fbcp-ili9341 is DispmanX-based; Batocera's recent builds for Pi use KMS/DRM, which is incompatible with DispmanX. Batocera's own TFT documentation notes that SPI/GPIO screens require pre-compiled driver binaries and that some drivers only function on older 32-bit images. Whether a working fbcp-ili9341 build exists for the current Batocera release targeting the Pi Zero 2W (ARMv7, 32-bit) must be verified before this ADR is finalised and before display procurement.
-
-The specific module (Waveshare, Adafruit, generic breakout) is not locked in — any ILI9341-compatible 2.4" panel will work once the driver question is resolved. Module selection happens at procurement.
+SPI panels in this size are thin (~2mm PCB + glass), inexpensive, and well-documented under Linux. The specific module (Waveshare, Adafruit, generic breakout) is not locked in — any ILI9341-compatible 2.4" panel with a matching pinout will work. Module selection happens at procurement.
 
 ## Considered Alternatives
 
@@ -42,7 +40,7 @@ The initial ADR rejected SPI citing this figure, which is correct for naive sing
 ## Consequences
 
 - The specific ILI9341 module must be verified for SPI clock compatibility with the Zero 2W before ordering. Most 2.4" modules run fine at 40–62MHz SPI; a few cheaper ones throttle to 16MHz and will not hit 30fps.
-- **Driver compatibility must be verified before procurement.** fbcp-ili9341 relies on DispmanX, which is not available under KMS/DRM (used by recent Batocera builds). Possible resolution paths: (a) confirm a 32-bit Batocera image for Pi Zero 2W still ships with DispmanX support; (b) use Batocera's native TFT overlay mechanism if it covers ILI9341; (c) switch to a KMS-compatible SPI driver (e.g., `fb_ili9341` kernel module). Until one of these is confirmed working, this ADR is provisional.
+- fbcp-ili9341 configuration requires specifying GPIO pin assignments, SPI bus speed, and display orientation. This is well-documented for RetroPie + Raspberry Pi OS and is a known-quantity setup step.
 - 30fps at 320×240 covers NES, SNES, GBA, and Game Boy. N64 and PSP content will require downscaling and may stutter — this is accepted for the target platform scope.
 - The CSI camera port remains free. A camera add-on is theoretically possible but not in scope.
 - SPI occupies several GPIO pins. The button matrix PCB routing must avoid those pins; this is a layout constraint for Phase 2.
