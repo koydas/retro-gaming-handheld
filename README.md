@@ -34,6 +34,7 @@ If the end result also plays Pokémon, that's a bonus.
 | PCB façade | Custom — KiCad → JLCPCB | Houses buttons, routes inputs to Pi |
 | Battery | 3.7V LiPo ~4000mAh | Large-format cell, sized to enclosure |
 | Charge/protect | TP4056 module | CC/CV charging + over-discharge protection |
+| Boost converter | 5V boost module (TBD) | Steps up 3.7V LiPo to 5V for the Pi |
 | Enclosure | Bambu Lab FDM print | ~149×68×22mm, PLA or PETG |
 | Buttons | 2×3 diagonal action layout | A/B/X/Y + L/R style arrangement |
 | OS | RetroPie | Raspberry Pi OS-based, fbcp-ili9341 compatible |
@@ -61,7 +62,7 @@ If the end result also plays Pokémon, that's a bonus.
 - [ ] Final print with desired finish
 
 ### Phase 4 — Assembly
-- [ ] Wire power circuit (TP4056 → LiPo → Pi)
+- [ ] Wire power circuit (TP4056 → LiPo → boost converter → Pi 5V)
 - [ ] Seat PCB façade and display
 - [ ] Close enclosure
 - [ ] Smoke test

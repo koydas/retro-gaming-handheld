@@ -1,7 +1,7 @@
 # ADR-0004: OS Selection — RetroPie on Raspberry Pi OS
 
 **Date:** 2026-06-23  
-**Status:** Accepted
+**Status:** Accepted — provisional *(specific RPi OS / RetroPie version with DispmanX support unconfirmed; see Decision and Consequences)*
 
 ## Context
 
@@ -13,7 +13,11 @@ The OS choice therefore directly affects whether the display works at all, and m
 
 Use **RetroPie** on **Raspberry Pi OS (32-bit)**.
 
-RetroPie is built on top of Raspberry Pi OS, which maintains the DispmanX graphics stack on 32-bit builds. fbcp-ili9341 was originally developed and tested against this environment and has well-documented community setups with ILI9341 panels on Pi Zero hardware. The display driver compatibility concern that put ADR-0001 in provisional status is resolved by this choice.
+RetroPie is built on top of Raspberry Pi OS, which historically maintained the DispmanX graphics stack on 32-bit builds — the environment fbcp-ili9341 was originally developed and tested against, with well-documented community setups on Pi Zero hardware.
+
+**However, this assumption is not confirmed for current releases.** The fbcp-ili9341 README (Feb 2024 update) notes that later Raspberry Pi OS releases no longer have DispmanX active by default, even on 32-bit images. A specific RetroPie release / Raspberry Pi OS version where DispmanX remains functional must be identified and pinned before procurement. The alternative is to switch to a KMS-compatible SPI driver (e.g., the `fb_ili9341` kernel module), which would remove the DispmanX dependency entirely and allow any current RPi OS version to work.
+
+This ADR is therefore provisional pending one of: (a) identification of a pinned RetroPie/RPi OS release with confirmed DispmanX support on Pi Zero 2W; or (b) confirmation that a KMS-compatible driver path works for the chosen ILI9341 panel.
 
 ## Considered Alternatives
 
@@ -31,7 +35,7 @@ Similar situation to Batocera — modern builds use KMS, SPI display support is 
 
 ## Consequences
 
-- ADR-0001 display decision is unblocked: fbcp-ili9341 on RetroPie + Raspberry Pi OS (32-bit) is a tested, community-documented path.
+- **ADR-0001 display driver path remains provisional.** RetroPie is the correct OS direction, but the specific image version must be pinned to one where DispmanX is available, or the driver must be switched to a KMS-compatible alternative. This is a Phase 5 prerequisite — verify before ordering the display module.
 - RetroPie requires more manual configuration than Batocera (emulator setup, controller mapping, scraping). This is accepted — the project is a learning exercise and software configuration is within scope.
 - The 32-bit OS constraint is not a problem for the Pi Zero 2W: 512MB RAM is below the threshold where 64-bit addressing provides a benefit, and 32-bit images are well-supported on this hardware.
 - RetroPie receives less frequent updates than Batocera. For a stationary emulation device that is not networked, this is not a concern.
