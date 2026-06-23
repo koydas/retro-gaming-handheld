@@ -68,7 +68,7 @@ If the end result also plays Pokémon, that's a bonus.
 
 ### Phase 5 — Software
 - [ ] Flash Batocera to microSD
-- [ ] Configure display (DSI, resolution, overscan)
+- [ ] Configure display (SPI/fbcp-ili9341, resolution, overscan)
 - [ ] Map button inputs
 - [ ] Load a ROM or two and actually play something
 

@@ -7,7 +7,7 @@
 
 The handheld needs an onboard power supply that fits the 149×68×22mm enclosure, provides enough runtime to be useful (target: 2+ hours at moderate emulator load), charges safely over USB, and does not require custom PCB circuitry to implement correctly on a first build. LiPo cells are dangerous if overcharged, over-discharged, or shorted — any chosen solution must include both charge management and over-discharge protection.
 
-The Pi Zero 2W draws roughly 0.5W idle and peaks near 1.5W under emulator load. A ~4000mAh cell at 3.7V nominal (~14.8Wh usable at ~80% efficiency through the boost stage) gives a theoretical ceiling of roughly 6–8 hours; realistic play is 3–4 hours accounting for boost converter losses, display, and occasional spikes.
+The Pi Zero 2W draws roughly 0.5W idle and peaks near 1.5W under emulator load. A ~4000mAh cell at 3.7V nominal is ~14.8Wh raw; at ~80% boost efficiency that yields ~11.8Wh usable at 5V. At 1.5W peak draw this gives a theoretical ceiling of roughly 6–8 hours; realistic play is 3–4 hours accounting for display load and occasional spikes.
 
 ## Decision
 

@@ -5,7 +5,7 @@
 
 ## Context
 
-The enclosure must fit all internal components within approximately 149×68×22mm: the Pi Zero 2W, a flat ~4000mAh LiPo cell, the TP4056 module, a boost converter, the PCB façade, and the Waveshare 2.4" DSI display. Tolerances matter — the display cutout, button holes, and PCB standoffs need to be accurate to within ~0.3mm or the assembly either binds or rattles. The project is explicitly a learning exercise, meaning iteration is expected and the manufacturing method must support rapid design cycles without significant lead time or cost per iteration.
+The enclosure must fit all internal components within approximately 149×68×22mm: the Pi Zero 2W, a flat ~4000mAh LiPo cell, the TP4056 module, a boost converter, the PCB façade, and a 2.4" SPI display (ILI9341 or compatible). Tolerances matter — the display cutout, button holes, and PCB standoffs need to be accurate to within ~0.3mm or the assembly either binds or rattles. The project is explicitly a learning exercise, meaning iteration is expected and the manufacturing method must support rapid design cycles without significant lead time or cost per iteration.
 
 ## Decision
 
