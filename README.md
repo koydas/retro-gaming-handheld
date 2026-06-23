@@ -37,7 +37,7 @@ If the end result also plays Pokémon, that's a bonus.
 | Boost converter | 5V boost module (TBD) | Steps up 3.7V LiPo to 5V for the Pi |
 | Enclosure | Bambu Lab FDM print | ~149×68×22mm, PLA or PETG |
 | Buttons | 2×3 diagonal action layout | A/B/X/Y + L/R style arrangement |
-| OS | RetroPie | Raspberry Pi OS-based, fbcp-ili9341 compatible |
+| OS | RetroPie | RPi OS Bookworm (32-bit), FBTFT (`fb_ili9341`) |
 
 ---
 

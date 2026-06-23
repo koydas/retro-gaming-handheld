@@ -33,7 +33,7 @@ The Zero 2W exposes mini-HDMI, making this electrically viable. However: HDMI pa
 The Pi 3A+ has a native DSI port and would enable the original display plan. However, the Pi 3A+ is 56mm wide vs the Zero 2W's 30mm — in a 68mm-wide enclosure, that leaves 6mm total margin for walls and side controls. The button layout (2×3 action + L/R) requires ~19mm per side and cannot be accommodated. Rejected on enclosure geometry grounds.
 
 **SPI at single-threaded speeds (~9–12fps)**  
-The initial ADR rejected SPI citing this figure, which is correct for naive single-threaded writes. fbcp-ili9341 does not use naive writes — it uses DMA and pushes the bus harder than a software loop can. The 9–12fps figure was not representative of the actual driver performance on this hardware. Rejection of SPI was therefore premature and is reversed.
+The initial ADR rejected SPI citing this figure, which applies to naive single-threaded userspace writes. It is not a fundamental SPI bandwidth limit — it is a software bottleneck. At 40–62MHz SPI clock, the ILI9341 bus can sustain well over 30fps of 320×240 16-bit frames in theory; the question is whether the kernel driver overhead on Pi Zero 2W brings it back below that threshold in practice. That question is unverified for FBTFT and is documented as Q1 in CLAUDE.md and as the provisional flag in ADR-0005. Rejection of SPI on bandwidth grounds was premature and is reversed; the driver performance question is an open item, not a resolved one.
 
 ## Consequences
 
