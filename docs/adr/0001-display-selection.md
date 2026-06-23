@@ -1,4 +1,4 @@
-# ADR-0001: Display Selection — SPI Display via fbcp-ili9341
+# ADR-0001: Display Selection — SPI Display via FBTFT
 
 **Date:** 2026-06-23  
 **Status:** Accepted *(revised — original draft assumed DSI; see context)*
