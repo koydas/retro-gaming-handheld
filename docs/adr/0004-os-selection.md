@@ -21,7 +21,7 @@ RetroPie is built on top of Raspberry Pi OS Bookworm (32-bit), which uses KMS/DR
 The original choice. Batocera is a polished, self-contained gaming image with a good frontend and broad emulator support. Rejected because its current Pi builds use KMS/DRM, which breaks fbcp-ili9341 and leaves the SPI display without a confirmed driver path. Resolving this would require pinning an older Batocera release or sourcing a pre-compiled DispmanX-compatible binary — neither is verified, and both add fragility to a first build. Rejected on display driver compatibility grounds.
 
 **Plain Raspberry Pi OS (Lite) without RetroPie**  
-Technically viable — fbcp-ili9341 works, and emulators can be installed manually. Rejected because the manual frontend and emulator configuration overhead is out of scope for this project. RetroPie packages the same foundation with a usable gaming layer on top.
+Technically viable — FBTFT (`fb_ili9341`) works on the same Raspberry Pi OS Bookworm base, and emulators can be installed manually. Rejected because the manual frontend and emulator configuration overhead is out of scope for this project. RetroPie packages the same foundation with a usable gaming layer on top.
 
 **Lakka**  
 Lakka is a LibreELEC-based gaming OS with a clean frontend. It has the same KMS/DRM issue as Batocera for fbcp-ili9341. Additionally, Lakka documentation for SPI displays on Pi Zero is sparse compared to RetroPie. Rejected on the same driver grounds as Batocera.

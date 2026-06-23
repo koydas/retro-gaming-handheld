@@ -3,7 +3,7 @@
 > A DIY retro gaming handheld built around the Raspberry Pi Zero 2W — my personal vehicle for learning PCB design, power delivery, and mechanical tolerances from scratch.
 
 ![Status](https://img.shields.io/badge/status-in%20progress-yellow)
-![OS](https://img.shields.io/badge/OS-Batocera-blue)
+![OS](https://img.shields.io/badge/OS-RetroPie-blue)
 ![PCB](https://img.shields.io/badge/PCB-KiCad%20→%20JLCPCB-green)
 
 ---
@@ -19,7 +19,7 @@ This is not a kit and not a product — it's a scratch-built handheld game conso
 - **PCB design** — custom façade board in KiCad, manufactured at JLCPCB
 - **Power delivery** — safe LiPo charging and protection with a TP4056 circuit
 - **Mechanical tolerances** — designing a printed enclosure that actually fits
-- **Embedded Linux** — Batocera OS configuration on a constrained platform
+- **Embedded Linux** — RetroPie configuration on a constrained platform
 
 If the end result also plays Pokémon, that's a bonus.
 
