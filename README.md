@@ -62,13 +62,13 @@ If the end result also plays Pokémon, that's a bonus.
 - [ ] Final print with desired finish
 
 ### Phase 4 — Assembly
-- [ ] Wire power circuit (TP4056 → LiPo → boost converter → Pi 5V)
+- [ ] Wire power circuit: LiPo cell to TP4056 B+/B− (charging input); boost converter to TP4056 OUT+/OUT− (protected discharge output); boost 5V output to Pi
 - [ ] Seat PCB façade and display
 - [ ] Close enclosure
 - [ ] Smoke test
 
 ### Phase 5 — Software
-- [ ] Flash Raspberry Pi OS Bookworm (32-bit) to microSD
+- [ ] Flash **Raspberry Pi OS (Legacy, 32-bit) — Bookworm** to microSD (Trixie/Debian 13 FBTFT+RetroPie compatibility unverified — see ADR-0004)
 - [ ] Install RetroPie on top via the RetroPie installer script
 - [ ] Configure FBTFT dtoverlay for ILI9341 in `/boot/firmware/config.txt` (SPI bus, GPIO pins, bus speed) — exact overlay syntax to be confirmed against RPi OS documentation
 - [ ] Map button inputs

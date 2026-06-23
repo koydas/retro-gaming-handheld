@@ -1,7 +1,7 @@
 # ADR-0004: OS Selection — RetroPie on Raspberry Pi OS
 
 **Date:** 2026-06-23  
-**Status:** Accepted *(DispmanX dependency eliminated by ADR-0005 — no version pinning required)*
+**Status:** Accepted — provisional *(Bookworm is now the Legacy release; Trixie/Debian 13 compatibility with FBTFT and RetroPie is unverified — see Consequences)*
 
 ## Context
 
@@ -13,7 +13,9 @@ The OS choice therefore directly affects whether the display works at all, and m
 
 Use **RetroPie** on **Raspberry Pi OS (32-bit)**.
 
-RetroPie is built on top of Raspberry Pi OS Bookworm (32-bit), which uses KMS/DRM as its graphics stack. The display driver question — previously the reason this ADR was marked provisional — is resolved by ADR-0005, which selects FBTFT (`fb_ili9341`) as a KMS-compatible kernel driver. DispmanX is not used, and no version pinning is required. Any current Raspberry Pi OS Bookworm (32-bit) image is compatible.
+Use **Raspberry Pi OS (Legacy, 32-bit) — Bookworm** as the base, with RetroPie installed on top via the RetroPie installer script.
+
+As of 2026-06-23, the standard Raspberry Pi OS download is Debian 13 Trixie; Bookworm is available under the Legacy category. This ADR explicitly pins to **Bookworm (Legacy)** because FBTFT (`fb_ili9341`) and RetroPie compatibility with Trixie on Pi Zero 2W is unverified. Bookworm uses KMS/DRM as its graphics stack; FBTFT works on it without DispmanX. Whether Trixie supports the same FBTFT path and the RetroPie installer script is an open question (see Consequences).
 
 ## Considered Alternatives
 
@@ -31,7 +33,8 @@ Similar situation to Batocera — modern builds use KMS, SPI display support is 
 
 ## Consequences
 
-- Display driver selection is documented in ADR-0005 (FBTFT/KMS). No DispmanX dependency, no version pinning required on the OS side.
+- Display driver selection is documented in ADR-0005 (FBTFT/KMS). No DispmanX dependency.
+- **Version pinning required:** this ADR pins to Raspberry Pi OS (Legacy, 32-bit) Bookworm. Trixie (Debian 13) is now the standard release; FBTFT and RetroPie installer compatibility with Trixie on Pi Zero 2W is unverified. Evaluate Trixie before Phase 5 — if compatible, this ADR can be updated to remove the Legacy pin.
 - RetroPie requires more manual configuration than Batocera (emulator setup, controller mapping, scraping). This is accepted — the project is a learning exercise and software configuration is within scope.
 - The 32-bit OS constraint is not a problem for the Pi Zero 2W: 512MB RAM is below the threshold where 64-bit addressing provides a benefit, and 32-bit images are well-supported on this hardware.
 - RetroPie receives less frequent updates than Batocera. For a stationary emulation device that is not networked, this is not a concern.

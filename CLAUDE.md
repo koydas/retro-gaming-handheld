@@ -45,6 +45,7 @@ These are unresolved uncertainties that must be answered before committing to co
 |---|----------|--------|
 | Q1 | Does FBTFT (`fb_ili9341`) on Pi Zero 2W + RPi OS Bookworm achieve 30fps at 320×240? fbcp-ili9341 did via DMA optimisation; FBTFT is a generic kernel driver and its throughput on this hardware is unmeasured. | Display module procurement, ADR-0005 |
 | Q2 | Charge-and-play topology: is there space on the PCB for a true power-path IC (e.g., BQ24074)? CN3165 is a CC/CV charger — same problem as TP4056 — and is not a valid option here. If space does not allow a power-path IC, device must be powered off to charge. | ADR-0002, Phase 2 PCB layout |
+| Q3 | Does Raspberry Pi OS Trixie (Debian 13, 32-bit) support FBTFT (`fb_ili9341`) and the RetroPie installer on Pi Zero 2W? Bookworm is now the Legacy release. ADR-0004 pins to Bookworm until this is verified. | ADR-0004, Phase 5 |
 
 ## Spec-first discipline
 
