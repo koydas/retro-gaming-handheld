@@ -86,7 +86,9 @@ Starting with the physical layout. Figuring out where everything fits before com
 
 ```
 retro-gaming-handheld/
-├── docs/           # Notes, references, wiring diagrams
+├── docs/
+│   ├── adr/        # Architecture Decision Records
+│   └── ...         # Notes, references, wiring diagrams
 ├── kicad/          # Schematic + PCB layout project files
 ├── stl/            # Enclosure and bracket STL/3MF files
 └── images/         # Photos, renders, assembly diagrams
