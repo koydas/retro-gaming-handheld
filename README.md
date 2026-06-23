@@ -68,8 +68,9 @@ If the end result also plays Pokémon, that's a bonus.
 - [ ] Smoke test
 
 ### Phase 5 — Software
-- [ ] Flash RetroPie to microSD
-- [ ] Configure display (SPI/fbcp-ili9341, resolution, overscan)
+- [ ] Flash Raspberry Pi OS Bookworm (32-bit) to microSD
+- [ ] Install RetroPie on top via the RetroPie installer script
+- [ ] Configure display via FBTFT dtoverlay (`fb_ili9341`, SPI pins, bus speed)
 - [ ] Map button inputs
 - [ ] Load a ROM or two and actually play something
 
