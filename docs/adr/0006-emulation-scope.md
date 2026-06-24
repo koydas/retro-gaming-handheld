@@ -75,7 +75,7 @@ The Pi Zero 2W handles SNES and Genesis reliably with the correct cores. Excludi
 
 - Button layout, display resolution (320×240), and audio configuration are designed around 8-bit and 16-bit era emulation. These are appropriate for the in-scope systems and do not need to accommodate N64 or PS1 controller layouts or higher audio bandwidth.
 - The RetroPie installation in Phase 5 should enable only in-scope emulators. Shipping with N64 or PS1 cores enabled misleads testing and wastes SD card space.
-- ADR-0001 Consequences previously noted that "N64 and PSP content will require downscaling and may stutter — this is accepted for the target platform scope." That framing is superseded by this ADR: N64 and PSP are out of scope, not a tolerated tradeoff. ADR-0001 is updated accordingly.
+- ADR-0001 Consequences previously noted that "N64 and PSP content will require downscaling and may stutter — this is accepted for the target platform scope." That framing is superseded by this ADR: PS1, N64, and Saturn are out of scope, not a tolerated tradeoff. ADR-0001 is updated accordingly.
 - GBA (gpSP) and SNES (snes9x2010) are the most demanding in-scope systems and should be used as the performance benchmark during Phase 5 testing.
 - SA-1 and SuperFX SNES titles (Star Fox, Yoshi's Island, Kirby Super Star) are a known edge case within the supported scope. If 30fps cannot be sustained with `frameskip = 1` on these specific titles, they are treated as exceptions — not a reason to revise the SNES scope entry.
 - mGBA on GBA is documented as marginal rather than excluded. If gpSP accuracy issues affect specific titles during Phase 5, mGBA can be evaluated on a per-game basis; the default recommendation remains gpSP.
