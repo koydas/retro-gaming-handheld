@@ -30,7 +30,7 @@ Establishing explicit scope prevents design drift: button layout, display resolu
 - Sega Saturn
 - All later generations
 
-The out-of-scope systems are excluded because library-wide 30fps cannot be guaranteed on Pi Zero 2W hardware. The reasons differ by system: N64 and Sega Saturn are a hard capability ceiling — no core or configuration makes them consistently viable at 30fps on this SoC. PlayStation 1 is excluded on library consistency grounds: PCSX-ReARMed (ARM-optimized, the standard PS1 core for ARM hardware) can run a meaningful subset of PS1 titles on Zero 2W, but performance is highly game-dependent and 30fps cannot be guaranteed across the PS1 library. See Considered Alternatives for the PS1 analysis.
+The out-of-scope systems are excluded because library-wide 30fps cannot be guaranteed on Pi Zero 2W hardware. The reasons differ by system: N64 and Sega Saturn are a hard capability ceiling — no core or configuration makes them consistently viable at 30fps on this SoC. PlayStation 1 is excluded on two independent grounds: (1) library consistency — PCSX-ReARMed can run a meaningful subset of PS1 titles on Zero 2W, but performance is highly game-dependent and 30fps cannot be guaranteed across the PS1 library; (2) controller layout — this handheld provides D-pad, 4 face buttons, L1/R1, and Start/Select, with no L2/R2 and no analog sticks. A significant portion of the PS1 library requires analog input or L2/R2, making it unplayable on this hardware regardless of emulation performance. See Considered Alternatives for details.
 
 ## FPS Analysis — 30fps Minimum Target
 
@@ -56,7 +56,11 @@ Platform: RetroPie on Pi Zero 2W (4× ARM Cortex-A53 @ 1GHz, 512MB LPDDR2, Raspb
 ## Considered Alternatives
 
 **Include PlayStation 1 (PCSX-ReARMed)**  
-PCSX-ReARMed is the standard PS1 core for ARM hardware and includes ARM-native assembly paths. On a Pi Zero 2W it runs a subset of PS1 titles, but the library is large and performance is highly game-dependent: CPU-intensive titles (Final Fantasy VII–IX, many RPGs with heavy geometry or FMV sequences) regularly drop below 30fps without aggressive configuration tuning, and frameskip introduces timing artefacts that are visible on a 320×240 display. The Pi Zero 2W's 512MB RAM is also a constraint for titles that use large texture pages. Guaranteeing 30fps across the PS1 library is not feasible on this hardware. Rejected on reliability grounds.
+Rejected on two independent grounds.
+
+*Performance:* PCSX-ReARMed is the standard PS1 core for ARM hardware and includes ARM-native assembly paths. On a Pi Zero 2W it runs a subset of PS1 titles, but the library is large and performance is highly game-dependent: CPU-intensive titles (Final Fantasy VII–IX, many RPGs with heavy geometry or FMV sequences) regularly drop below 30fps without aggressive configuration tuning, and frameskip introduces timing artefacts that are visible on a 320×240 display. The Pi Zero 2W's 512MB RAM is also a constraint for titles that use large texture pages. Guaranteeing 30fps across the PS1 library is not feasible on this hardware.
+
+*Controller layout:* The PS1 DualShock has L1, L2, R1, R2, two analog sticks (with L3/R3 clicks), 4 face buttons, D-pad, Start, and Select. This handheld provides D-pad, 4 face buttons, L1/R1 shoulder buttons, and Start/Select — no L2/R2, no analog sticks. A large portion of the PS1 library either requires analog input (3D platformers, driving games, action games) or maps critical actions to L2/R2. These titles are unplayable on this hardware regardless of emulation performance, so including PS1 in scope would misrepresent what the device can actually play.
 
 **Include Nintendo 64 (Mupen64Plus-Next)**  
 Mupen64Plus is the standard N64 emulator on RetroPie. N64 requires software rendering at acceptable accuracy levels; the Pi Zero 2W has no GPU pipeline accessible to the emulation stack in a useful way. Even with aggressive resolution downscaling and frameskip, many N64 titles run at 15–20fps on this hardware. Rejected on hard performance ceiling grounds.
