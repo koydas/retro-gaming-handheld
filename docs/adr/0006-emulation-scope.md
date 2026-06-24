@@ -49,7 +49,7 @@ Platform: RetroPie on Pi Zero 2W (4× ARM Cortex-A53 @ 1GHz, 512MB LPDDR2, Raspb
 
 **Status definitions:**
 
-- **Solid** — stable ≥30fps across the system's library with the recommended core; no special configuration required for the general case
+- **Solid** — stable ≥30fps across the system's standard cartridge library with the recommended core; no special configuration required for the general case. Known chip-architecture exceptions (e.g., SA-1, SuperFX for SNES) are documented in the Notes column and are explicitly excluded from the library-wide guarantee.
 - **Marginal** — 30fps achievable with specific core selection, configuration tuning, or frameskip; some titles may not qualify
 - **Unreliable** — cannot consistently meet 30fps; excluded from supported scope
 
