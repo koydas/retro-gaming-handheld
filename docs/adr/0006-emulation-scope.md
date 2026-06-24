@@ -9,6 +9,8 @@ The Pi Zero 2W has well-defined performance ceilings: four ARM Cortex-A53 cores 
 
 Establishing explicit scope prevents design drift: button layout, display resolution (320×240), audio latency targets, and Phase 5 software configuration all follow from the emulation target. An out-of-scope system is not a stretch goal — it is a system that cannot run acceptably on this hardware under any supported configuration.
 
+**Scope of this analysis:** This ADR covers CPU-side emulation performance only — whether each system's recommended core can sustain 30fps game logic on the Pi Zero 2W. Whether FBTFT can deliver those frames to the display at 30fps is a separate prerequisite covered in ADR-0005 (open question Q1 in CLAUDE.md). Both conditions must hold for end-to-end 30fps to be achievable. If FBTFT throughput proves insufficient, the display driver path must be revisited and the conclusions of this ADR will need to be re-evaluated against the actual displayed frame rate.
+
 ## Decision
 
 **Supported systems (in scope):**
