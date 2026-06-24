@@ -53,6 +53,14 @@ These are unresolved uncertainties that must be answered before committing to co
 | Q2 | Charge-and-play topology: is there space on the PCB for a true power-path IC (e.g., BQ24074)? CN3165 is a CC/CV charger — same problem as TP4056 — and is not a valid option here. If space does not allow a power-path IC, device must be powered off to charge. | ADR-0002, Phase 2 PCB layout |
 | Q3 | Does Raspberry Pi OS Trixie (Debian 13, 32-bit) support FBTFT (`fb_ili9341`) and the RetroPie installer on Pi Zero 2W? Bookworm is now the Legacy release. ADR-0004 pins to Bookworm until this is verified. | ADR-0004, Phase 5 |
 
+## Reference documents
+
+Two living documents track information that changes as hardware decisions are made. Keep them in sync with the ADRs and README — do not let them drift.
+
+- **`docs/gpio-map.md`** — Pin allocation for the 40-pin GPIO header. Update whenever a GPIO assignment is added or changed (display control pins, button matrix, any new peripheral). The tentative DC/RST/BL assignments must be finalised and locked here before Phase 2 PCB routing starts.
+
+- **`docs/bom.md`** — Top-level parts list with procurement status and blocking questions. Update when: a part is confirmed/spec'd/ordered/received, a blocking question (Q1, Q2, Q3) is resolved, or a new component is introduced by a hardware decision. Do not add PCB passives or wiring here — those belong in the Phase 2 KiCad BOM.
+
 ## Spec-first discipline
 
 This project is in R&D. No hardware has been purchased. **Verify specs against manufacturer documentation before writing or updating ADRs.** The DSI assumption in ADR-0001 v1 is an example of what happens when this step is skipped.
