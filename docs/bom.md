@@ -27,10 +27,11 @@ Components required for the retro gaming handheld. Update this document when a p
 
 Dependencies dictate this sequence:
 
-1. **Now (no blockers):** Pi Zero 2W, TP4056 + DW01A module, microSD card.
-2. **After Q1 resolved:** 2.4" ILI9341 display module.
-3. **After Phase 2 PCB schematic:** Tactile switches (count and footprint confirmed), PCB façade order to JLCPCB. Resolve Q2 and decide on power-path IC.
-4. **After Phase 3 fit-check print:** LiPo cell (dimensions confirmed against battery cavity). Boost converter (current budget confirmed against power rail design). Final PETG enclosure print.
+1. **Now (no blockers):** Pi Zero 2W, TP4056 + DW01A module, microSD card. **One ILI9341 display unit** (to run Q1 — measure FBTFT throughput before committing to quantity/supplier).
+2. **Before Phase 2 PCB layout:** Boost converter module — select and measure the physical footprint so the enclosure CAD and PCB can accommodate it. Confirm output ripple is acceptable for the Pi.
+3. **After Q1 resolved:** Full display procurement (quantity and supplier confirmed).
+4. **After Phase 2 PCB schematic:** Tactile switches (count and footprint confirmed), PCB façade order to JLCPCB. Resolve Q2 and decide on power-path IC.
+5. **After Phase 3 fit-check print:** LiPo cell (dimensions confirmed against battery cavity). Final PETG enclosure print.
 
 ---
 
