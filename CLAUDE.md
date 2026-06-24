@@ -37,6 +37,12 @@ All significant hardware and design decisions are documented in `docs/adr/`. Rea
 - Be honest about tradeoffs. No marketing language.
 - If an ADR supersedes a previous one, update the old ADR's status line and document the correction in the new ADR's Context.
 
+**After any change to an ADR or to docs/README/hardware tables**, check cross-ADR consistency before committing:
+1. Read every ADR in `docs/adr/`.
+2. Verify that facts stated in multiple ADRs agree (hardware specs, OS version, driver names, FPS targets, enclosure dimensions, emulation scope, open questions).
+3. Check that cross-references point to the right ADR number and accurately describe what that ADR says.
+4. If a contradiction or gap is found, fix it in the same commit — do not leave inconsistencies for later.
+
 ## Open questions — verify before hardware procurement
 
 These are unresolved uncertainties that must be answered before committing to components or layout. Do not treat them as solved.
