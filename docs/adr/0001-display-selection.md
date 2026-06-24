@@ -39,6 +39,6 @@ The initial ADR rejected SPI citing this figure, which applies to naive single-t
 
 - The specific ILI9341 module must be verified for SPI clock compatibility with the Zero 2W before ordering. Most 2.4" modules run fine at 40–62MHz SPI; a few cheaper ones throttle to 16MHz and will not hit 30fps.
 - Display driver configuration (GPIO pin assignments, SPI bus speed, display orientation) is handled via FBTFT `dtoverlay` — see ADR-0005 for the driver decision and setup details.
-- 30fps at 320×240 covers NES, SNES, GBA, and Game Boy. N64 and PSP content will require downscaling and may stutter — this is accepted for the target platform scope.
+- 30fps at 320×240 covers NES, SNES, GBA, Game Boy, Sega Genesis, and all prior 8-bit and 16-bit generations — the full supported scope as defined in ADR-0006. N64, PlayStation 1, and Sega Saturn are out of scope for this build; see ADR-0006 for the rationale and FPS analysis.
 - The CSI camera port remains free. A camera add-on is theoretically possible but not in scope.
 - SPI occupies several GPIO pins. The button matrix PCB routing must avoid those pins; this is a layout constraint for Phase 2.

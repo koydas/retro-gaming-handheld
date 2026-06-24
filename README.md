@@ -41,6 +41,24 @@ If the end result also plays Pokémon, that's a bonus.
 
 ---
 
+## Supported Systems
+
+The Pi Zero 2W (1GHz quad-core ARM Cortex-A53, 512MB RAM) can sustain 30fps on 8-bit and 16-bit era emulation with appropriate RetroArch cores. Later generations exceed its CPU and memory ceiling and are explicitly out of scope.
+
+| System | RetroArch Core (RetroPie) | 30fps Status |
+|--------|--------------------------|--------------|
+| Atari 2600 / 7800 | Stella / ProSystem | Solid |
+| NES / Famicom | FCEUmm | Solid |
+| Sega Master System / Game Gear | Genesis Plus GX | Solid |
+| Game Boy / Game Boy Color | Gambatte | Solid |
+| Sega Genesis / Mega Drive | Genesis Plus GX / PicoDrive | Solid |
+| SNES / Super Famicom | snes9x2010 | Solid |
+| Game Boy Advance | gpSP | Solid |
+
+**Out of scope:** PlayStation 1, Nintendo 64, Sega Saturn, and all later generations. No core configuration makes these systems reliably viable at 30fps on this hardware. See [ADR-0006](docs/adr/0006-emulation-scope.md) for the full FPS analysis and rejected alternatives.
+
+---
+
 ## Project Phases
 
 ### Phase 1 — Design
