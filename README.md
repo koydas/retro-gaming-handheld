@@ -57,7 +57,7 @@ The Pi Zero 2W (1GHz quad-core ARM Cortex-A53, 512MB RAM) can sustain 30fps on 8
 | SNES / Super Famicom | snes9x2010 | Solid |
 | Game Boy Advance | gpSP | Solid |
 
-**Out of scope:** PlayStation 1, Nintendo 64, Sega Saturn, and all later generations. No core configuration makes these systems reliably viable at 30fps on this hardware. See [ADR-0006](docs/adr/0006-emulation-scope.md) for the full FPS analysis and rejected alternatives.
+**Out of scope:** PlayStation 1, Nintendo 64, Sega Saturn, and all later generations. N64 and Saturn cannot run viably at 30fps on this hardware under any configuration. PS1 is excluded on two grounds: 30fps cannot be guaranteed across the PS1 library, and the handheld has no L2/R2 or analog sticks — a large portion of the PS1 library requires both. See [ADR-0006](docs/adr/0006-emulation-scope.md) for the full analysis.
 
 ---
 

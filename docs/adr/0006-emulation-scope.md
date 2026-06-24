@@ -44,7 +44,7 @@ Platform: RetroPie on Pi Zero 2W (4× ARM Cortex-A53 @ 1GHz, 512MB LPDDR2, Raspb
 | Sega Master System / Game Gear | Genesis Plus GX | **Solid** | |
 | Game Boy / Game Boy Color | Gambatte | **Solid** | Gambatte is the lighter option; mGBA also solid on GBC but heavier |
 | Sega Genesis / Mega Drive | Genesis Plus GX or PicoDrive | **Solid** | PicoDrive has ARM-native assembly paths; both cores are viable |
-| SNES / Super Famicom | snes9x2010 | **Solid** | Do not use `snes9x-current` — too heavy for Zero 2W. SA-1 chip games (Kirby Super Star) and SuperFX games (Star Fox, Yoshi's Island) may need `frameskip = 1` |
+| SNES / Super Famicom | snes9x2010 | **Solid** | Do not use `snes9x-current` — too heavy for Zero 2W. **Exception — not covered by this Solid rating:** SA-1 chip games (Kirby Super Star) and SuperFX games (Star Fox, Yoshi's Island) may need `frameskip = 1` or drop below 30fps; see Consequences. |
 | Game Boy Advance | gpSP | **Solid** | gpSP has ARM-native optimizations and achieves 60fps reliably. mGBA is **marginal** on Zero 2W — most titles pass 30fps but demanding games may dip; gpSP is the recommended default |
 
 **Status definitions:**
