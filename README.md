@@ -43,6 +43,19 @@ For the full parts list with specs, procurement status, and blocking questions, 
 
 ---
 
+## Diagrams
+
+Architecture and design diagrams are in [`docs/diagrams.md`](docs/diagrams.md):
+
+- **System Architecture** — hardware block diagram (power, SBC, display, input)
+- **Power Delivery Topology** — LiPo → TP4056/DW01A → boost converter → Pi, including the unresolved charge-and-play question (Q2)
+- **Display Driver Stack** — software layers from SPI hardware bus to RetroPie UI
+- **GPIO Pin Allocation** — Pi Zero 2W header grouped by assignment (fixed, tentative, reserved, available)
+- **Project Phases & Dependencies** — phases 1–5 with Q1/Q2/Q3 as explicit blockers
+- **Emulation Scope** — in-scope vs out-of-scope systems with reasoning
+
+---
+
 ## Supported Systems
 
 The Pi Zero 2W (1GHz quad-core ARM Cortex-A53, 512MB RAM) can sustain 30fps on 8-bit and 16-bit era emulation with appropriate RetroArch cores. Later generations exceed its CPU and memory ceiling and are explicitly out of scope.
@@ -110,11 +123,13 @@ Starting with the physical layout. Figuring out where everything fits before com
 ```
 retro-gaming-handheld/
 ├── docs/
-│   ├── adr/        # Architecture Decision Records
-│   └── ...         # Notes, references, wiring diagrams
-├── kicad/          # Schematic + PCB layout project files
-├── stl/            # Enclosure and bracket STL/3MF files
-└── images/         # Photos, renders, assembly diagrams
+│   ├── adr/           # Architecture Decision Records
+│   ├── diagrams.md    # Mermaid architecture diagrams
+│   ├── gpio-map.md    # GPIO pin allocation reference
+│   └── bom.md         # Bill of materials and procurement status
+├── kicad/             # Schematic + PCB layout project files
+├── stl/               # Enclosure and bracket STL/3MF files
+└── images/            # Photos, renders, assembly diagrams
 ```
 
 ---
