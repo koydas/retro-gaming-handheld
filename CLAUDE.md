@@ -67,9 +67,11 @@ This project is in R&D. No hardware has been purchased. **Verify specs against m
 
 When in doubt about a hardware claim, flag it explicitly rather than asserting it confidently.
 
-## PR review comments
+## PR workflow
 
-When reading review comments on a PR (from Codex or humans), the full workflow is:
+**When creating or updating a PR**, always post `@codex review` as a PR comment to trigger an initial (or re-)review.
+
+**When reading review comments on a PR (from Codex or humans)**, the full workflow is:
 
 1. **Fix** — apply the correction in the codebase (code, ADR, README, whatever is wrong).
 2. **Resolve** — mark the review thread as resolved on GitHub.
