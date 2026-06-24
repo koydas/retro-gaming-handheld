@@ -9,12 +9,12 @@ Tracks which of the 40 GPIO header pins are spoken for and which are available f
 | SPI0 display bus (hardware-fixed) | 4 | GPIO 8, 9, 10, 11 |
 | Display control — DC, RST, BL (tentative) | 3 | GPIO 18, 25, 27 |
 | UART — reserved for debug | 2 | GPIO 14, 15 |
-| Available for button matrix | 14 | see table below |
+| Available for button matrix | 15 | see table below |
 | I2C (avoid unless needed) | 2 | GPIO 2, 3 |
 | HAT EEPROM (not usable as GPIO) | — | pins 27/28 |
 | Power / GND | — | pins 1, 2, 4, 6, 9, 14, 17, 20, 25, 30, 34, 39 |
 
-14 GPIO available for buttons. 12 buttons direct-wired fits with 2 spare; a matrix approach (e.g., 4×3) would use 7 and leave more headroom.
+15 GPIO available for buttons. 12 buttons direct-wired fits with 3 spare; a matrix approach (e.g., 4×3) would use 7 and leave more headroom.
 
 ---
 
@@ -24,9 +24,9 @@ Tracks which of the 40 GPIO header pins are spoken for and which are available f
 |-----------|----------|-------------|------------|--------|
 | 1  | —       | 3.3V        | Power rail  | Power |
 | 2  | —       | 5V          | Power rail  | Power |
-| 3  | GPIO 2  | I2C0 SDA    | —           | **Avoid** — keep I2C free |
+| 3  | GPIO 2  | I2C1 SDA    | —           | **Avoid** — keep I2C free |
 | 4  | —       | 5V          | Power rail  | Power |
-| 5  | GPIO 3  | I2C0 SCL    | —           | **Avoid** — keep I2C free |
+| 5  | GPIO 3  | I2C1 SCL    | —           | **Avoid** — keep I2C free |
 | 6  | —       | GND         | —           | GND |
 | 7  | GPIO 4  | GPCLK0      | —           | **Available** |
 | 8  | GPIO 14 | UART TX     | UART debug  | **Reserved** |
@@ -73,6 +73,6 @@ Tracks which of the 40 GPIO header pins are spoken for and which are available f
 
 **UART (reserved):** GPIO 14/15 are kept free for serial debug access during bring-up. They can be repurposed for buttons after Phase 5 is stable, but blocking them now avoids rework.
 
-**Available for button matrix:** GPIO 4, 17, 22, 23, 24, 26, 5, 6, 12, 13, 16, 19, 20, 21 — 14 pins. Button count is ~12 (D-pad ×4, face ×4, shoulder ×2, Start/Select ×2); direct wiring uses 12 pins and leaves 2 free. A 4×3 matrix uses 7 pins if GPIO is tight.
+**Available for button matrix:** GPIO 4, 7, 17, 22, 23, 24, 5, 6, 12, 13, 16, 19, 20, 21, 26 — 15 pins. Button count is ~12 (D-pad ×4, face ×4, shoulder ×2, Start/Select ×2); direct wiring uses 12 pins and leaves 3 free. A 4×3 matrix uses 7 pins if GPIO is tight.
 
-**I2C (avoid unless needed):** GPIO 2/3 are the primary I2C bus. No I2C device is planned, but keeping the bus free costs nothing and avoids rework if a sensor or expansion is added later.
+**I2C (avoid unless needed):** GPIO 2/3 are the primary user-facing I2C bus (I2C1, `/dev/i2c-1`). I2C0 is the HAT EEPROM bus on pins 27/28 — separate bus, not general-purpose. No I2C device is planned, but keeping I2C1 free costs nothing and avoids rework if a sensor or expansion is added later.
