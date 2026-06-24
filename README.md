@@ -39,6 +39,8 @@ If the end result also plays Pokémon, that's a bonus.
 | Buttons | 2×3 diagonal action layout | A/B/X/Y + L/R style arrangement |
 | OS | RetroPie | RPi OS Bookworm (32-bit), FBTFT (`fb_ili9341`) |
 
+For the full parts list with specs, procurement status, and blocking questions, see [`docs/bom.md`](docs/bom.md).
+
 ---
 
 ## Supported Systems
@@ -68,6 +70,7 @@ The Pi Zero 2W (1GHz quad-core ARM Cortex-A53, 512MB RAM) can sustain 30fps on 8
 - [ ] Confirm Pi Zero 2W mounting strategy
 
 ### Phase 2 — PCB Façade
+- [ ] Finalise GPIO pin assignments in [`docs/gpio-map.md`](docs/gpio-map.md) before routing
 - [ ] Schematic in KiCad (button matrix, GPIO routing)
 - [ ] PCB layout with JLCPCB DRC rules
 - [ ] Fab order and first article review
