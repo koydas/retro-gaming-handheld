@@ -7,7 +7,7 @@
 
 The Pi Zero 2W has well-defined performance ceilings: four ARM Cortex-A53 cores at 1GHz and 512MB LPDDR2 RAM. These figures are sufficient for 8-bit and 16-bit era emulation but fall short of what is needed to run PlayStation 1, Nintendo 64, or Sega Saturn titles reliably at 30fps across their libraries. The 30fps minimum target is established in ADR-0001; the platform is RetroPie on Raspberry Pi OS Bookworm (32-bit) as decided in ADR-0004.
 
-Establishing explicit scope prevents design drift: button layout, display resolution (320×240), audio latency targets, and Phase 5 software configuration all follow from the emulation target. An out-of-scope system is not a stretch goal — it is a system that cannot run acceptably on this hardware under any supported configuration.
+Establishing explicit scope prevents design drift: button layout, display resolution (320×240), audio latency targets, and Phase 5 software configuration all follow from the emulation target. An out-of-scope system is not a stretch goal — it is a system for which library-wide 30fps cannot be guaranteed on this hardware, whether because the hardware cannot run it at all (N64, Saturn) or because performance is too title-dependent for a reliable scope claim (PS1).
 
 **Scope of this analysis:** This ADR covers CPU-side emulation performance only — whether each system's recommended core can sustain 30fps game logic on the Pi Zero 2W. Whether FBTFT can deliver those frames to the display at 30fps is a separate prerequisite covered in ADR-0005 (open question Q1 in CLAUDE.md). Both conditions must hold for end-to-end 30fps to be achievable. If FBTFT throughput proves insufficient, the display driver path must be revisited and the conclusions of this ADR will need to be re-evaluated against the actual displayed frame rate.
 
@@ -30,7 +30,7 @@ Establishing explicit scope prevents design drift: button layout, display resolu
 - Sega Saturn
 - All later generations
 
-The out-of-scope systems are excluded because they cannot be emulated reliably at 30fps on Pi Zero 2W hardware. This is a hard capability ceiling, not a configuration problem — no core tuning, resolution override, or frameskip setting makes PS1 or N64 consistently viable at 30fps on this SoC.
+The out-of-scope systems are excluded because library-wide 30fps cannot be guaranteed on Pi Zero 2W hardware. The reasons differ by system: N64 and Sega Saturn are a hard capability ceiling — no core or configuration makes them consistently viable at 30fps on this SoC. PlayStation 1 is excluded on library consistency grounds: PCSX-ReARMed (ARM-optimized, the standard PS1 core for ARM hardware) can run a meaningful subset of PS1 titles on Zero 2W, but performance is highly game-dependent and 30fps cannot be guaranteed across the PS1 library. See Considered Alternatives for the PS1 analysis.
 
 ## FPS Analysis — 30fps Minimum Target
 
