@@ -44,3 +44,4 @@ What does this decision make easier or harder going forward?
 | [0003](0003-enclosure-manufacturing.md) | Enclosure Manufacturing | Accepted |
 | [0004](0004-os-selection.md) | OS Selection | Accepted |
 | [0005](0005-display-driver.md) | Display Driver Stack | Accepted — provisional |
+| [0006](0006-emulation-scope.md) | Emulation Scope and FPS Viability | Accepted |

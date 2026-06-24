@@ -39,6 +39,26 @@ If the end result also plays Pokémon, that's a bonus.
 | Buttons | 2×3 diagonal action layout | A/B/X/Y + L/R style arrangement |
 | OS | RetroPie | RPi OS Bookworm (32-bit), FBTFT (`fb_ili9341`) |
 
+For the full parts list with specs, procurement status, and blocking questions, see [`docs/bom.md`](docs/bom.md).
+
+---
+
+## Supported Systems
+
+The Pi Zero 2W (1GHz quad-core ARM Cortex-A53, 512MB RAM) can sustain 30fps on 8-bit and 16-bit era emulation with appropriate RetroArch cores. Later generations exceed its CPU and memory ceiling and are explicitly out of scope.
+
+| System | RetroArch Core (RetroPie) | 30fps Status |
+|--------|--------------------------|--------------|
+| Atari 2600 / 7800 | Stella / ProSystem | Solid |
+| NES / Famicom | FCEUmm | Solid |
+| Sega Master System / Game Gear | Genesis Plus GX | Solid |
+| Game Boy / Game Boy Color | Gambatte | Solid |
+| Sega Genesis / Mega Drive | Genesis Plus GX / PicoDrive | Solid |
+| SNES / Super Famicom | snes9x2010 | Solid |
+| Game Boy Advance | gpSP | Solid |
+
+**Out of scope:** PlayStation 1, Nintendo 64, Sega Saturn, and all later generations. N64 and Saturn cannot run viably at 30fps on this hardware under any configuration. PS1 is excluded on two grounds: 30fps cannot be guaranteed across the PS1 library, and the handheld has no L2/R2 or analog sticks — a large portion of the PS1 library requires both. See [ADR-0006](docs/adr/0006-emulation-scope.md) for the full analysis.
+
 ---
 
 ## Project Phases
@@ -50,6 +70,7 @@ If the end result also plays Pokémon, that's a bonus.
 - [ ] Confirm Pi Zero 2W mounting strategy
 
 ### Phase 2 — PCB Façade
+- [ ] Finalise GPIO pin assignments in [`docs/gpio-map.md`](docs/gpio-map.md) before routing
 - [ ] Schematic in KiCad (button matrix, GPIO routing)
 - [ ] PCB layout with JLCPCB DRC rules
 - [ ] Fab order and first article review
