@@ -82,5 +82,5 @@ Do all four steps, in order, for every actionable comment. Do not fix silently w
 
 ## Language
 
-- Code, filenames, and documentation: **English**
-- Conversation with the user: **French**
+- Code, filenames, documentation, and all GitHub comments/PR replies: **English**
+- Conversation with the user: **English**
