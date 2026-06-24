@@ -69,7 +69,7 @@ Tracks which of the 40 GPIO header pins are spoken for and which are available f
 
 **SPI0 (fixed by hardware):** GPIO 8, 9, 10, 11 are the SPI0 bus. GPIO 9 (MISO) is occupied by SPI0 even though the ILI9341 display is write-only — the Pi SPI controller holds the pin. Do not route anything else to these four pins.
 
-**Display control pins (tentative):** GPIO 25 (DC), GPIO 27 (RST), and GPIO 18 (BL) are community-standard choices for FBTFT dtoverlay on ILI9341. They are not hardware-fixed — any free GPIO can be used, configured via `dtoverlay=tft9341,...,dc_pin=<n>,reset_pin=<n>` in `config.txt`. Finalise these assignments in Phase 2 before PCB routing. If backlight is hardwired to 3.3V (no PWM dimming), GPIO 18 is freed.
+**Display control pins (tentative):** GPIO 25 (DC), GPIO 27 (RST), and GPIO 18 (BL) are community-standard choices for FBTFT dtoverlay on ILI9341. They are not hardware-fixed — any free GPIO can be used, configured via the stock `dtoverlay=fbtft` overlay with the `ili9341` controller parameter in `/boot/firmware/config.txt`. The exact parameter syntax must be confirmed against RPi OS Bookworm documentation before Phase 5 — the README Phase 5 checklist reflects this open item. Finalise these assignments in Phase 2 before PCB routing. If backlight is hardwired to 3.3V (no PWM dimming), GPIO 18 is freed.
 
 **UART (reserved):** GPIO 14/15 are kept free for serial debug access during bring-up. They can be repurposed for buttons after Phase 5 is stable, but blocking them now avoids rework.
 
