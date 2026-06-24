@@ -71,7 +71,7 @@ flowchart TD
     USB --> TP
     TP <--> DW
     DW <-->|charge / protect| LIPO
-    LIPO -->|3.7V protected| BOOST
+    DW -->|protected discharge\nTP4056 OUT+/OUT-| BOOST
     BOOST --> PI_LOAD
     BOOST --> DISP_LOAD
     PI_LOAD --> RUNTIME
@@ -130,7 +130,7 @@ flowchart LR
 
     COND_PIN["Conditional — GPIO 7\nSPI0 CE1 by default\nFree only if dtoverlay=spi0-1cs\nadded to config.txt"]
 
-    BTN_PINS["Available for Button Matrix — 14 pins\nGPIO 4 5 6 12 13 16 17\nGPIO 19 20 21 22 23 24 26\n12 buttons direct-wired: 3 spare\n4x3 matrix 7 pins: 8 spare"]
+    BTN_PINS["Available for Button Matrix — 14 pins\nGPIO 4 5 6 12 13 16 17\nGPIO 19 20 21 22 23 24 26\n12 buttons direct-wired: 2 spare\n(+1 if GPIO 7 freed via dtoverlay=spi0-1cs)\n4x3 matrix 7 pins: 7 spare"]
 
     PI --> SPI0
     PI --> DISP_CTRL
