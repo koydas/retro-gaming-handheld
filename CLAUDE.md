@@ -84,3 +84,10 @@ Do all four steps, in order, for every actionable comment. Do not fix silently w
 
 - Code, filenames, documentation, and all GitHub comments/PR replies: **English**
 - Conversation with the user: **English**
+
+## Skills
+
+@.claude/skills/adr-workflow.md
+@.claude/skills/hardware-guard.md
+@.claude/skills/living-docs-sync.md
+@.claude/skills/pr-workflow.md
