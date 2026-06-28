@@ -15,7 +15,12 @@ When creating a new ADR, updating an existing ADR, or making any change that aff
    - **Considered Alternatives** — every evaluated option with a specific reason for rejection; "not considered" is not a reason
    - **Consequences** — what is now easier, what is now harder, what open questions remain
 
-4. **Set Status** on the second line: `Accepted`, `Accepted — provisional` (if an open question leaves a dependency unresolved), or `Superseded by ADR-XXXX`.
+4. **Include the date/status header** immediately after the title, following the format in `docs/adr/README.md`:
+   ```
+   **Date:** YYYY-MM-DD
+   **Status:** Accepted
+   ```
+   Valid Status values: `Accepted`, `Accepted — provisional` (if an open question leaves a dependency unresolved), or `Superseded by ADR-XXXX`. Do not omit the `**Date:**` line — existing ADRs in this repo always include it.
 
 5. **Update the index**: Add the new ADR to the table in `docs/adr/README.md`.
 
